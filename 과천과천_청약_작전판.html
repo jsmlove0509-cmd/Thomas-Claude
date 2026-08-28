@@ -1,0 +1,478 @@
+<title>과천과천 청약 작전판</title>
+<meta name="description" content="공공분양 청약 전략 — 지구 비교, 물량 깔때기, 2026~2031 타임라인">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#eef1ec; --surface:#ffffff; --surface-alt:#e3e8e1; --line:#c3cdc6;
+  --blueprint:#1d4e73; --blueprint-soft:#4d7896; --blueprint-tint:#dbe6ec;
+  --ink:#16232b; --ink-2:#52636a;
+  --accent:#b8402a; --accent-tint:#f1d9d0;
+  --good:#1f8f5e; --mid:#c07a1f; --low:#4a63c2;
+  --good-tint:#d9efe4; --mid-tint:#f5e6cf; --low-tint:#dfe3f6;
+  --shadow: 0 1px 0 var(--line);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1b26; --surface:#142838; --surface-alt:#1b3247; --line:#2c4a5e;
+    --blueprint:#7fc2e0; --blueprint-soft:#4f8aa8; --blueprint-tint:#1c3a4c;
+    --ink:#eaf1f4; --ink-2:#9db3bd;
+    --accent:#ef7a52; --accent-tint:#3a2620;
+    --good:#4fa87f; --mid:#b5822f; --low:#7288d1;
+    --good-tint:#173327; --mid-tint:#3a2c12; --low-tint:#20264a;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1b26; --surface:#142838; --surface-alt:#1b3247; --line:#2c4a5e;
+  --blueprint:#7fc2e0; --blueprint-soft:#4f8aa8; --blueprint-tint:#1c3a4c;
+  --ink:#eaf1f4; --ink-2:#9db3bd;
+  --accent:#ef7a52; --accent-tint:#3a2620;
+  --good:#4fa87f; --mid:#b5822f; --low:#7288d1;
+  --good-tint:#173327; --mid-tint:#3a2c12; --low-tint:#20264a;
+}
+
+*{box-sizing:border-box;}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:"Noto Sans KR","IBM Plex Sans KR",sans-serif;
+  line-height:1.6;
+  font-size:15px;
+}
+.page{max-width:980px; margin:0 auto; padding:28px 20px 80px;}
+
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums;}
+
+h1,h2,h3{font-family:"IBM Plex Sans KR",sans-serif; text-wrap:balance; margin:0;}
+
+/* ---------- title block ---------- */
+.titleblock{
+  border:1.5px solid var(--blueprint);
+  background:var(--surface);
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap:0;
+  margin-bottom:22px;
+}
+.titleblock-main{padding:22px 24px;}
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.14em;
+  color:var(--blueprint); text-transform:uppercase; margin-bottom:8px;
+}
+.titleblock-main h1{font-size:26px; font-weight:700; color:var(--ink);}
+.titleblock-main .sub{color:var(--ink-2); font-size:13.5px; margin-top:6px;}
+.titleblock-meta{
+  border-left:1.5px solid var(--blueprint);
+  display:grid; grid-template-rows:repeat(4,1fr);
+  font-family:"IBM Plex Mono",monospace; font-size:11px;
+}
+.titleblock-meta div{
+  padding:8px 16px; border-bottom:1px solid var(--line);
+  display:flex; flex-direction:column; justify-content:center; min-width:150px;
+}
+.titleblock-meta div:last-child{border-bottom:none;}
+.titleblock-meta span{color:var(--ink-2); letter-spacing:.06em; text-transform:uppercase; font-size:9.5px;}
+.titleblock-meta b{color:var(--ink); font-weight:600; font-size:12.5px; margin-top:2px;}
+
+/* ---------- stat strip ---------- */
+.stats{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+  background:var(--line); border:1px solid var(--line); margin-bottom:34px;
+}
+.stat{background:var(--surface); padding:16px 18px;}
+.stat .label{font-size:11.5px; color:var(--ink-2); margin-bottom:6px;}
+.stat .value{font-family:"IBM Plex Mono",monospace; font-size:22px; font-weight:600; color:var(--blueprint);}
+.stat .value small{font-size:12px; font-weight:500; color:var(--ink-2); font-family:"Noto Sans KR",sans-serif;}
+
+/* ---------- section frame ---------- */
+section{margin-bottom:44px;}
+.section-head{display:flex; align-items:baseline; gap:10px; margin-bottom:14px; border-bottom:1.5px solid var(--blueprint); padding-bottom:8px;}
+.section-num{font-family:"IBM Plex Mono",monospace; color:var(--blueprint); font-size:13px;}
+.section-head h2{font-size:18px; font-weight:700;}
+.section-note{color:var(--ink-2); font-size:12.5px; margin-top:-6px; margin-bottom:14px;}
+
+/* ---------- filter rule diagram ---------- */
+.filter-steps{display:flex; align-items:center; gap:10px; margin-bottom:20px; flex-wrap:wrap;}
+.filter-chip{
+  border:1.5px solid var(--blueprint); background:var(--blueprint-tint);
+  padding:8px 14px; font-size:13px; font-weight:600; color:var(--blueprint);
+  white-space:nowrap;
+}
+.filter-arrow{color:var(--ink-2); font-size:16px;}
+.filter-note{font-size:12.5px; color:var(--ink-2); flex-basis:100%;}
+
+.bandrow{margin-bottom:14px;}
+.bandrow .bandlabel{display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:5px;}
+.bandlabel b{color:var(--ink);}
+.band{display:flex; height:30px; border:1px solid var(--line); overflow:hidden;}
+.band span{display:flex; align-items:center; justify-content:center; font-size:11.5px; font-weight:600; color:#fff;}
+.seg-sigun{background:var(--ink-2); width:30%;}
+.seg-gg{background:var(--accent); width:20%;}
+.seg-metro{background:var(--blueprint); width:50%;}
+.seg-full{background:var(--blueprint); width:100%;}
+.bracket{font-size:11.5px; color:var(--accent); font-weight:600; margin-top:5px; text-align:right;}
+
+/* ---------- comparison table ---------- */
+.tablewrap{overflow-x:auto; border:1px solid var(--line);}
+table{width:100%; border-collapse:collapse; font-size:13px; min-width:760px;}
+thead th{
+  background:var(--blueprint); color:#fff; text-align:left; font-weight:600;
+  padding:10px 12px; font-size:11.5px; letter-spacing:.02em; white-space:nowrap;
+}
+tbody td{padding:11px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+tbody tr:nth-child(even){background:var(--surface-alt);}
+tbody tr.pin{background:var(--accent-tint);}
+tbody tr.pin td:first-child{border-left:4px solid var(--accent);}
+.district-name{font-weight:700; display:flex; align-items:center; gap:6px;}
+.pinbadge{
+  font-family:"IBM Plex Mono",monospace; font-size:9.5px; background:var(--accent); color:#fff;
+  padding:2px 6px; letter-spacing:.05em;
+}
+.num{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; white-space:nowrap;}
+.pill{
+  display:inline-flex; align-items:center; gap:5px; padding:3px 9px; font-size:11.5px; font-weight:600;
+  white-space:nowrap;
+}
+.pill.good{background:var(--good-tint); color:var(--good);}
+.pill.mid{background:var(--mid-tint); color:var(--mid);}
+.pill.low{background:var(--low-tint); color:var(--low);}
+.stars{letter-spacing:1px;}
+
+/* ---------- funnel ---------- */
+.funnel-note{font-size:12px; color:var(--ink-2); margin-bottom:16px;}
+.funnel{display:flex; flex-direction:column; align-items:center; gap:2px;}
+.funnel-stage{width:100%; display:flex; flex-direction:column; align-items:center;}
+.funnel-bar{
+  height:38px; background:var(--blueprint); color:#fff; display:flex; align-items:center; justify-content:center;
+  font-size:12.5px; font-weight:600; text-align:center; padding:0 10px;
+}
+.funnel-stage:last-child .funnel-bar{background:var(--accent);}
+.funnel-caption{font-size:11px; color:var(--ink-2); margin:4px 0 10px; text-align:center;}
+.funnel-arrow{color:var(--ink-2); font-size:12px; margin:0 0 2px;}
+
+/* ---------- timeline ---------- */
+.timeline{position:relative; padding:50px 10px 10px; overflow-x:auto;}
+.timeline-track{position:relative; min-width:820px; height:2px; background:var(--blueprint); margin:0 10px;}
+.timeline-years{display:flex; justify-content:space-between; min-width:820px; margin:0 10px;}
+.tyear{position:relative; width:1px; flex:1;}
+.tyear-dot{
+  position:absolute; top:-4px; left:0; width:9px; height:9px; border-radius:50%;
+  background:var(--surface); border:2px solid var(--blueprint); transform:translateX(-50%);
+}
+.tyear-dot.key{background:var(--accent); border-color:var(--accent); width:11px; height:11px;}
+.tyear-label{
+  position:absolute; top:10px; left:0; transform:translateX(-50%);
+  font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:13px; color:var(--blueprint);
+}
+.tyear-events{
+  position:absolute; bottom:24px; left:0; transform:translateX(-50%);
+  width:150px; display:flex; flex-direction:column; gap:4px; align-items:center;
+}
+.tevent{
+  font-size:11px; line-height:1.4; text-align:center; padding:5px 8px;
+  background:var(--surface); border:1px solid var(--line); color:var(--ink-2);
+}
+.tevent.key{border-color:var(--accent); color:var(--accent); font-weight:600; background:var(--accent-tint);}
+
+/* ---------- district cards ---------- */
+.cards{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+.card{border:1px solid var(--line); background:var(--surface); padding:16px 18px;}
+.card.pin{border-color:var(--accent); border-width:1.5px;}
+.card-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px; gap:8px;}
+.card-head h3{font-size:14.5px; font-weight:700;}
+.card ul{margin:0; padding-left:18px; font-size:12.5px; color:var(--ink-2);}
+.card li{margin-bottom:4px;}
+.card li b{color:var(--ink); font-weight:600;}
+.card .risk{margin-top:8px; padding-top:8px; border-top:1px dashed var(--line); font-size:11.5px; color:var(--accent);}
+
+/* ---------- two column: watchlist / actions ---------- */
+.twocol{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+.checklist{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+.checklist li{display:flex; gap:10px; font-size:13px; align-items:flex-start;}
+.checkbox{
+  flex:none; width:15px; height:15px; border:1.5px solid var(--blueprint); margin-top:2px;
+}
+.tag{
+  font-family:"IBM Plex Mono",monospace; font-size:10px; background:var(--blueprint-tint); color:var(--blueprint);
+  padding:1px 6px; margin-left:6px; white-space:nowrap;
+}
+.actionlist{list-style:none; margin:0; padding:0; counter-reset:action; display:flex; flex-direction:column; gap:10px;}
+.actionlist li{
+  counter-increment:action; display:flex; gap:10px; font-size:13px; align-items:flex-start;
+}
+.actionlist li::before{
+  content:counter(action); flex:none; width:20px; height:20px; background:var(--blueprint); color:#fff;
+  font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:600;
+  display:flex; align-items:center; justify-content:center; margin-top:1px;
+}
+
+/* ---------- footer ---------- */
+footer{
+  margin-top:50px; padding-top:16px; border-top:1.5px solid var(--blueprint);
+  display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;
+  font-size:11.5px; color:var(--ink-2);
+}
+footer a{color:var(--blueprint-soft);}
+.log-entry{font-size:12px; color:var(--ink-2); margin-bottom:4px;}
+.log-entry b{color:var(--ink); font-family:"IBM Plex Mono",monospace; font-weight:600;}
+
+@media (max-width:720px){
+  .titleblock{grid-template-columns:1fr;}
+  .titleblock-meta{border-left:none; border-top:1.5px solid var(--blueprint); grid-template-rows:none; grid-template-columns:1fr 1fr;}
+  .stats{grid-template-columns:1fr 1fr;}
+  .cards{grid-template-columns:1fr;}
+  .twocol{grid-template-columns:1fr;}
+}
+@media (prefers-reduced-motion:no-preference){
+  .card, tbody tr{transition:background-color .15s ease;}
+}
+tbody tr:hover{background:var(--blueprint-tint);}
+.card:hover{border-color:var(--blueprint-soft);}
+</style>
+
+<div class="page">
+
+  <div class="titleblock">
+    <div class="titleblock-main">
+      <div class="eyebrow">공공분양 청약 · 작전 브리핑</div>
+      <h1>과천과천 청약 작전판</h1>
+      <div class="sub">구 청약저축 인정액 기반 지역우선공급 전략 — 하남 거주 · 일반공급 전용</div>
+    </div>
+    <div class="titleblock-meta">
+      <div><span>기준일</span><b>2026.07.21</b></div>
+      <div><span>거주지</span><b>경기 하남시</b></div>
+      <div><span>목표평형</span><b>74·84㎡</b></div>
+      <div><span>공급유형</span><b>일반공급</b></div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="label">현재 인정액</div><div class="value">2,900<small>만원</small></div></div>
+    <div class="stat"><div class="label">월 납입 (유지 중)</div><div class="value">25<small>만원</small></div></div>
+    <div class="stat"><div class="label">2029 예상 인정액</div><div class="value">3,800<small>만원</small></div></div>
+    <div class="stat"><div class="label">본진 분양 예상</div><div class="value">2029<small>년~</small></div></div>
+  </div>
+
+  <section>
+    <div class="section-head"><span class="section-num">01</span><h2>지역우선공급 — 당락의 1차 필터</h2></div>
+    <p class="section-note">통장 인정액은 2차 순차제일 뿐, 거주지 필터를 통과 못하면 애초에 경쟁 대상이 아니다.</p>
+    <div class="filter-steps">
+      <div class="filter-chip">① 거주지역 필터</div>
+      <span class="filter-arrow">→</span>
+      <div class="filter-chip">② 저축총액(인정액) 순차제</div>
+      <span class="filter-note">통장이 아무리 강해도 ①에서 걸리면 ②를 써볼 기회조차 없음</span>
+    </div>
+
+    <div class="bandrow">
+      <div class="bandlabel"><span>66만㎡ 미만 택지</span><b>해당 시·도 거주자 100% 우선</b></div>
+      <div class="band"><span class="seg-full">해당 시·도 100%</span></div>
+    </div>
+    <div class="bandrow">
+      <div class="bandlabel"><span>66만㎡ 이상 대규모 택지 (과천과천 해당)</span><b>시·군 30 · 경기 20 · 수도권 50</b></div>
+      <div class="band">
+        <span class="seg-sigun">시·군 30%</span><span class="seg-gg">경기 20%</span><span class="seg-metro">수도권 50%</span>
+      </div>
+      <div class="bracket">▲ 하남 거주자 접근 가능 구간 = 경기 20% + 수도권 50% = 70%</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">02</span><h2>지구 비교판</h2></div>
+    <p class="section-note">선호 순위와 실제 기대값은 다르다. 접근성·물량·일정 3박자를 갖춘 카드는 하나뿐이다.</p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>지구</th><th>면적</th><th>총 물량</th><th>공공분양</th><th>하남 접근성</th><th>분양 시기</th><th>실제 기대값</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="pin">
+            <td><span class="district-name">과천과천(선바위)<span class="pinbadge">본진</span></span></td>
+            <td class="num">168.7만㎡</td>
+            <td class="num">10,204호</td>
+            <td class="num">4,400호</td>
+            <td><span class="pill good">● 경기+수도권 70%</span></td>
+            <td class="num">2029~</td>
+            <td><span class="pill good stars">★★★★☆</span></td>
+          </tr>
+          <tr>
+            <td><span class="district-name">과천 경마장</span></td>
+            <td class="num">115만㎡</td>
+            <td class="num">9,800호</td>
+            <td class="num">미정</td>
+            <td><span class="pill good">● 분할 예상 접근 가능</span></td>
+            <td class="num">2030년대 초</td>
+            <td><span class="pill mid stars">★★☆☆☆</span></td>
+          </tr>
+          <tr>
+            <td><span class="district-name">하남교산</span></td>
+            <td class="num">대규모</td>
+            <td class="num">-</td>
+            <td class="num">-</td>
+            <td><span class="pill good">● 하남 우선분 혜택</span></td>
+            <td class="num">순차 진행중</td>
+            <td><span class="pill good stars">★★★★☆</span></td>
+          </tr>
+          <tr>
+            <td><span class="district-name">용산국제업무지구</span></td>
+            <td class="num">46만㎡</td>
+            <td class="num">6,000~1만호</td>
+            <td class="num">지분적립형 70%특공</td>
+            <td><span class="pill low">✕ 서울 100% 우선(추정)</span></td>
+            <td class="num">2027말~2031</td>
+            <td><span class="pill low stars">★☆☆☆☆</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">03</span><h2>과천과천 물량 깔때기</h2></div>
+    <p class="funnel-note">공공분양 4,400호에서 하남 거주자가 실제로 접근 가능한 30평대 물량까지 — 막대 폭은 개념적 비교이며 정확한 수치는 각 단계 라벨 참고.</p>
+    <div class="funnel">
+      <div class="funnel-stage" style="width:100%">
+        <div class="funnel-bar" style="width:100%">공공분양 전체 4,400호</div>
+      </div>
+      <div class="funnel-arrow">↓ 뉴홈 선택형 제외, 일반형 비중 가정</div>
+      <div class="funnel-stage" style="width:78%">
+        <div class="funnel-bar" style="width:78%">일반형 약 2,200~3,000호</div>
+      </div>
+      <div class="funnel-arrow">↓ 일반공급 비중 약 30% (나머지 70% 특공)</div>
+      <div class="funnel-stage" style="width:52%">
+        <div class="funnel-bar" style="width:52%">일반공급 약 660~900호</div>
+      </div>
+      <div class="funnel-arrow">↓ 60㎡ 초과(74·84㎡) 비중 30~40%</div>
+      <div class="funnel-stage" style="width:32%">
+        <div class="funnel-bar" style="width:32%">30평대 일반공급 약 200~360호</div>
+      </div>
+      <div class="funnel-arrow">↓ 지역배분 경기 20% + 수도권 50% = 70%</div>
+      <div class="funnel-stage" style="width:22%">
+        <div class="funnel-bar" style="width:22%">하남 접근 물량 약 150~250호</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">04</span><h2>타임라인 2026 → 2031</h2></div>
+    <div class="timeline">
+      <div class="timeline-years">
+        <div class="tyear">
+          <div class="tyear-dot"></div><div class="tyear-label">2026</div>
+          <div class="tyear-events">
+            <div class="tevent">과천과천 주택 설계</div>
+            <div class="tevent">9월 경마장 이전부지 확정 · LH 개혁방안 발표</div>
+          </div>
+        </div>
+        <div class="tyear">
+          <div class="tyear-dot"></div><div class="tyear-label">2027</div>
+          <div class="tyear-events">
+            <div class="tevent">경마장 이전지 설계</div>
+            <div class="tevent">용산 분양 가능성(이르면 연말)</div>
+          </div>
+        </div>
+        <div class="tyear">
+          <div class="tyear-dot key"></div><div class="tyear-label">2028</div>
+          <div class="tyear-events">
+            <div class="tevent key">과천과천 착공</div>
+            <div class="tevent">GTX-C 정부과천청사역 · 용산 착공</div>
+          </div>
+        </div>
+        <div class="tyear">
+          <div class="tyear-dot key"></div><div class="tyear-label">2029</div>
+          <div class="tyear-events">
+            <div class="tevent key">과천과천 순차 분양<br>예상 인정액 3,800만</div>
+            <div class="tevent">경마장 착공(4Q) · 캠프킴 착공</div>
+          </div>
+        </div>
+        <div class="tyear">
+          <div class="tyear-dot"></div><div class="tyear-label">2030</div>
+          <div class="tyear-events"><div class="tevent">경마장 부지 분양</div></div>
+        </div>
+        <div class="tyear">
+          <div class="tyear-dot"></div><div class="tyear-label">2031</div>
+          <div class="tyear-events"><div class="tevent">용산국제업무지구 입주 목표</div></div>
+        </div>
+      </div>
+      <div class="timeline-track"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">05</span><h2>지구별 요약</h2></div>
+    <div class="cards">
+      <div class="card pin">
+        <div class="card-head"><h3>과천과천(선바위)</h3><span class="pill good stars">★★★★☆</span></div>
+        <ul>
+          <li><b>승인</b> 2024.8.14 지구계획 확정 (국토부고시 2024-428호)</li>
+          <li><b>교통</b> 4호선 선바위·경마공원역, GTX-C 2028 신설</li>
+          <li><b>자족</b> 판교급 자족용지 28만㎡, AI·반도체·바이오 클러스터</li>
+        </ul>
+        <div class="risk">리스크: 하수처리장 갈등 재점화, 뉴홈 선택형 비중 미공개, 국평 10억 안팎 예상</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>과천 경마장</h3><span class="pill mid stars">★★☆☆☆</span></div>
+        <ul>
+          <li><b>물량</b> 경마장+방첩사 이전부지 통합 9,800호</li>
+          <li><b>이전비</b> 최소 2조 3,879억(마사회 추산)</li>
+          <li><b>일정</b> 9월 이전부지 확정 → 2029.4Q 착공 목표</li>
+        </ul>
+        <div class="risk">리스크: 재원 미확정, 이전지 미확정, 마사회·시민 반발</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>하남교산</h3><span class="pill good stars">★★★★☆</span></div>
+        <ul>
+          <li>하남 거주가 <b>지역우선</b>으로 직접 작동하는 유일한 지구</li>
+          <li>LH가 3기 신도시 당첨선 공개 중 → 커트라인 가늠 가능</li>
+        </ul>
+        <div class="risk">현재 분석 우선순위에서 제외 — 별도 요청 시 재검토</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>용산국제업무지구</h3><span class="pill low stars">★☆☆☆☆</span></div>
+        <ul>
+          <li>46만㎡ → 66만㎡ 미만, <b>서울 거주자 우선</b> 가능성</li>
+          <li>1만호 증액은 학교용지 방안 미제시로 불투명</li>
+          <li>지분적립형 특공 70% → 일반공급 물량 희박</li>
+        </ul>
+        <div class="risk">리스크: 서울 전입 없이는 상징적 1순위에 그침</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">06</span><h2>워치리스트 &amp; 액션 아이템</h2></div>
+    <div class="twocol">
+      <div>
+        <h3 style="font-size:13px;margin-bottom:12px;color:var(--ink-2)">추적 항목</h3>
+        <ul class="checklist">
+          <li><span class="checkbox"></span>주거복지 로드맵 발표 <span class="tag">지연중</span></li>
+          <li><span class="checkbox"></span>경마장 이전 부지 확정 <span class="tag">9월</span></li>
+          <li><span class="checkbox"></span>LH 개혁방안 발표 <span class="tag">9월</span></li>
+          <li><span class="checkbox"></span>과천과천 주택 설계·공급유형 확정 <span class="tag">최우선</span></li>
+          <li><span class="checkbox"></span>과천과천 입주자모집공고 — 지역배분·평형 확정</li>
+          <li><span class="checkbox"></span>용산 학교용지 확보 방안 제시 여부</li>
+          <li><span class="checkbox"></span>6·3 지방선거 이후 서울시장 기류</li>
+          <li><span class="checkbox"></span>구 청약저축 월 25만원 한도 인정 여부</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size:13px;margin-bottom:12px;color:var(--ink-2)">실행 순위</h3>
+        <ol class="actionlist">
+          <li>월 25만원 납입 유지 — 유일하게 통제 가능한 방어선</li>
+          <li>구 청약저축 25만원 한도 인정 여부 은행·청약홈 확인</li>
+          <li>무주택세대구성원 요건 유지</li>
+          <li>84㎡ 경합 시 74㎡ 차순위 블록 병행 고려</li>
+          <li>과천과천 지구계획 고시문·도면 검토(과천시청 자료실)</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <div class="log-entry"><b>2026.07.21</b> — 과천과천 지구계획 확정 숫자 확보(10,204세대/공공분양 4,400호), 경마장 이전비 2.4조 확인, 용산 학교용지 미제시로 불투명</div>
+      <div>참고: 과천시 공공주택지구 조성 현황 · 과천도시공사 추진현황 · 국토교통부고시 제2024-428호</div>
+    </div>
+    <div>REV 1 · 청약저축_브리핑.md 기반 시각화</div>
+  </footer>
+
+</div>
